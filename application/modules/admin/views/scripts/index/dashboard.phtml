@@ -1,0 +1,162 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/shared/examples.js"></script>
+
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/GridPortlet.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/PortalColumn.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/PortalDropZone.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/PortalPanel.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/Portlet.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/TransactionsChartPortlet.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/portal.js"></script>
+<script type="text/javascript">
+    /*       
+    Ext.Loader.setConfig({
+      enabled: true,
+      paths: {
+          'Ext.app': '<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/portal/classes/'
+      }
+    });
+    */
+    Ext.Loader.setConfig({enabled: true});
+    Ext.Loader.setPath('Ext.ux', '/assets/js/ExtJs/plugins/ux');
+    
+    Ext.require([
+        'Ext.*',
+        'Ext.layout.container.*',
+        'Ext.resizer.Splitter',
+        'Ext.fx.target.Element',
+        'Ext.fx.target.Component',
+        'Ext.window.Window',
+        'Ext.app.Portlet',
+        'Ext.app.PortalColumn',
+        'Ext.app.PortalPanel',
+        'Ext.app.Portlet',
+        'Ext.app.PortalDropZone',
+        'Ext.app.GridPortlet',
+        'Ext.app.TransactionsChartPortlet'
+    ]);
+
+    Ext.onReady(function(){
+        Ext.create('Ext.app.Portal');        
+    });
+</script>
+
+
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/superboxselect/superboxselect.js"></script>
+
+<link href="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/superboxselect/superboxselect.css" media="screen" rel="Stylesheet" type="text/css" />
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/eventcategories/eventcategories.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/events.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-attendees.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-coordinators.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-coordinator-invitaion.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-faq-emails.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-questions.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-tickets-list.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-sell-tickets-list.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/events/event-view-ticket.js"></script>
+
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/membership/membership-types.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/membership/membership.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/coordinators/coordinators.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/coordinators/orgnizations.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/coordinators/subcoordinators.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/members/members.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/members/members-tickets-list.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/members/preview-members-tickets.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/exporter/exporter.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/emailtemplates/emailtemplates.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/administrators/administrators.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/administrators/administrators-groups.js"></script>
+
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/billings.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/transactions.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/transactiondetails.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/invoices.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/invoicedetails.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/memberships.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/billings/membershipdetails.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/example-data.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/membersreport.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/coordinatorsreport.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/eventsreport.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/ticketsreport.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/reports/transactionsreport.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/ux/DataView/LabelEditor.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/ux/DataView/DragSelector.js"></script>
+<link href="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/themes/data-view.css" media="screen" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/themes/themes.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/layout/handlers.js"></script>
+   
+<script type="text/javascript">
+Ext.onReady(function() {
+    
+    /*
+    Ext.Loader.setPath('Ext', '.');
+    Ext.Loader.setConfig({
+      enabled: true,
+      paths: {
+          'My': '<?php echo $this->baseUrl();?>/assets/js/ExtJs/plugins/ux/'
+      }
+    });
+    */
+    
+    
+/*
+    Ext.require([            
+            'Ext.*'                       
+        ]);
+    
+    Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+   
+    Ext.tip.QuickTipManager.init();
+    
+    Ext.create('Ext.tab.Panel', {
+        id:     'centertabs',
+        region: 'center',
+        flex:1,
+        height: 500,
+        activeTab: 0,       
+        
+        resizeTabs:true, // turn on tab resizing
+        minTabWidth: 150,
+        stateId: 'stateCenterPanel',        
+        items: [
+            { //add an initial tab
+                title: 'Home',
+                contentEl: 'center', //Get our content from the "center" div
+                closable:true
+            }
+        ],
+        renderTo : 'content',                
+        //renderTo : Ext.getBody()
+
+    }); 
+        
+ */    
+    
+    
+    
+	
+});
+</script>
+<div id="content">     
+    <div id="center">
+        
+    </div>
+</div>  

@@ -1,0 +1,80 @@
+<div id="content">
+	<div class="maincontent">
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <link href="/static/css/account.css" rel="stylesheet" type="text/css" /> 
+    <div id="col_210">
+		<div id="sidenav">
+        	<ul>
+        		<li class="text">Your Account</li>
+                <li class="tab"><a href="/account">Contact Info</a></li>
+                <li class="tab"><a href="/password">Password</a></li>
+                <li class="tab"><a href="/invoices">Invoices</a></li>
+                    <li class="tab_live"><a href="/transactions">Transactions</a></li>
+                    <li class="tab"><a href="/receipts">Receipts</a></li>
+                    <li class="tab"><a href="/membershipstatus">Membership status</a></li>
+                
+                <li class="tab"><a href="/account-close">Close Account</a></li>        
+        	</ul>
+        </div><!-- end sidenav -->
+	</div>
+    <div style="float: left; min-height: 400px; height: auto; "><img src="/static/images/space.gif" /></div>   
+    
+    <div style="float: left; height: 20px; width: 700px; padding-top: 20px; padding-bottom: 5px;  ">Ticket Order Transactions</div>    
+    <?
+    $dbAdapter              =   Zend_Db_Table::getDefaultAdapter();
+    $sql                    =   "SELECT * FROM `events` e INNER JOIN `orders` o ON e.id=o.eid LEFT JOIN orders_detail od ON o.id=od.oid LEFT JOIN `tickets` t ON od.tid=t.id  WHERE o.mid = '".Zend_Auth::getInstance()->getIdentity()->id."' ORDER BY o.id DESC ";
+    $result                 =   $dbAdapter->fetchAll($sql); 
+    if($result){                           
+    ?>    
+    <div id="invoiceListing">
+    <div id="eventName">Event Title</div>
+    <div id="eventName">Ticket Title</div>        
+    <div id="eventDate">Ticket Price</div>
+    <div id="eventStatus">Total Amount</div>
+    <div id="eventActions">Actions</div>
+    <div style="clear:both;"></div>
+    <?
+    $dbAdapter              =   Zend_Db_Table::getDefaultAdapter();
+    $sql                    =   "SELECT *, o.id AS tid FROM `events` e INNER JOIN `orders` o ON e.id=o.eid LEFT JOIN orders_detail od ON o.id=od.oid LEFT JOIN `tickets` t ON od.tid=t.id  WHERE o.mid = '".Zend_Auth::getInstance()->getIdentity()->id."'";
+    $result                 =   $dbAdapter->fetchAll($sql); 
+    foreach($result as $value) {                            
+    ?>    
+    <div class="" id="myevent<?php echo $value['id']; ?>" >
+    <div class="eventUnderName"><?php echo $value['title']; ?></div>
+    <div class="eventUnderName"><?php echo $value['ticket_title']; ?></div>         
+    <div class="eventUnderDate"><?php if($value['ticket_price']==0){ echo " Free ";}else{ echo "$".$value['ticket_price'];}?></div> 
+    <div class="eventUnderStatus"><?php if($value['total_amount']==0){ echo " Free ";}else{ echo "$".$value['total_amount'];}?></div>       
+    <div class="eventUnderActions"><img src="/static/images/preview.png" width="24" height="24" class="prview_ordertransaction" data="<?php echo $value['tid']; ?>" /></div> 
+    </div>
+    <div style="clear:both;"></div> 
+    <? 
+    }       
+    ?>
+    
+    </div>
+    <? } ?>    
+    
+    
+</div>
+
+    
+	
+
+
+
+
+	<!-- end content -->
+	
+

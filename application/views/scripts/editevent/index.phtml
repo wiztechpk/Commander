@@ -1,0 +1,465 @@
+<div id="content">
+  <div class="maincontent-inner">
+    <div id="wrapper">  
+    <div id="event_container">
+      <ul class="menu">
+        <li class="detail_select"><a href="#">Home</a></li>
+        <li class="arrow">&nbsp;</li>
+        <li class="date"><a href="#">About</a></li>
+        <li class="arrow">&nbsp;</li>
+        <li class="ticket"><a href="#">Services</a></li>
+        <li class="arrow">&nbsp;</li>
+        <li class="edit_event"><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+  
+                <div id="steps">
+                    <form id="formElem" name="formElem" action="/editevent/process" method="post">
+                    <input type="hidden" name="eid" id="eid" value="<?php echo $this->eid; ?>" />
+                    <input type="hidden" name="pid" id="pid" value="<?php echo $this->eid; ?>"  />                    
+                    <input type="hidden" name="tid" id="tid" value="<?php echo $this->tid; ?>" />
+                    
+                        <fieldset class="step">
+                            
+					<div><img src="/static/images/sep.png" alt="" /></div>	
+					 <h3>Event title and description.</h3>
+						<span>Please fill in the forms below. You can use the text editor below to describe the event in detail. You can add images, format the text like in any other text editor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</span>
+					
+			  <label><input type="text" name="title" id="title" value="<?php echo $this->eventdetail['title']; ?>"  class="event-title"  /></label>
+				<div style="clear: both; height: 1px; width: 850px; "></div>
+                <div >
+                <label><textarea name="description" id="description" cols="200" rows="20" class="event_textarea" ><?php echo $this->eventdetail['description']; ?></textarea></label>
+                </div>
+				<div><img src="/static/images/sep.png" alt="" /></div>	
+				<div id="select_logo_left"> 
+				<h4>Select the event logo.</h4>
+				<span>Select a file from your computer, that will represent the event logo. Minimum image size is 100x100 pixels, maximum is 800x800 pixels, 800KB. Click on the thumbnail to upload an image.</span>
+				
+				</div>
+                
+				<div id="select_logo_right">
+                <div id="event_logo_placeholder">                
+                <?php if($this->eventdetail['logo']){?>
+    			<img src="/event_logos/<?php echo $this->eventdetail['logo']; ?>" alt="<?php echo $this->eventdetail['title']; ?>" width="60" height="60" class="photo notranslate" />  <!-- class photo is SEO, not /static/css -->
+                <input type="hidden" value="<?php echo $this->eventdetail['logo']; ?>" name="event_logo" />
+    			<? } ?>
+                </div>
+                <div id="event_logo_file"></div>                
+                </div>
+				<div><img src="/static/images/sep.png" alt="" /></div>	
+				
+				<h3>Select event style</h3>
+                <div id="event-style">
+                  <ul id="mycarousel" class="jcarousel-skin-tango">
+                    <?php foreach($this->themesdetail as $key=>$value) { ?> 
+                    <li><img src="<?=$value['thumb_url']?>" alt="<?=$value['title']?>" id="<?=$value['id']?>" class="themes"  /><div id="theme_preview_hover<?=$value['id']?>" style="float: right; padding-right: 5px; display: none; " ><a href="<?=$value['image_url']?>" class="theme_preview" rel="theme_preview<?=$value['id']?>" ><img src="/static/images/magnifier.png" width="24" height="24" border="0" style="width: 24px; height:24px;" /></a></div><div id="theme_<?=$value['id']?>" class="">&nbsp;</div></li>
+                    <? } ?>
+                  </ul>
+                  <input type="hidden" name="selected_theme" id="selected_theme" /> 
+                </div>                 
+                                                                                
+				
+				<div style="clear: both;"></div>
+				<div id="event-color">
+				<div class="event_color"><img src="/static/images/grey_c.png" alt="" width="50" height="37" id="1" class="colors" /> <div id="color_1" class="">&nbsp;</div></div>
+				<div class="event_color"><img src="/static/images/light_blue_c.png" alt="" width="50" height="37" id="2" class="colors" /> <div id="color_2" class="">&nbsp;</div></div>
+				<div class="event_color"><img src="/static/images/orange_c.png" alt="" width="50" height="37" id="3" class="colors" /> <div id="color_3" class="">&nbsp;</div></div>
+				<div class="event_color"><img src="/static/images/lightgreen_c.png" alt="" width="50" height="37" id="4" class="colors" /> <div id="color_4" class="">&nbsp;</div></div>
+				<div class="event_color"><img src="/static/images/purple_c.png" alt="" width="50" height="37" id="5" class="colors" /> <div id="color_5" class="">&nbsp;</div></div>				
+				<div class="event_color"><img src="/static/images/lightgreen_c.png" alt="" width="50" height="37" id="8" class="colors" /> <div id="color_8" class="">&nbsp;</div></div>
+				<div class="event_color"><img src="/static/images/dark_blue_c.png" alt="" width="50" height="37" id="9" class="colors" /> <div id="color_9" class="">&nbsp;</div></div>
+				<div class="event_custom"><h5>Custom Image:</h5></div>
+				<div class="event_custom_select">
+                <div id="event_custom_theme" style="float: left;"></div>
+                <input type="file" name="custom_image" id="event_custom_theme_file" />                 
+                </div>
+                <input type="hidden" name="selected_color" id="selected_color" />
+                
+				<div><img src="/static/images/sep.png" alt="" /></div>	
+
+				</div>				
+				
+                        <div class="back_next_buttons">					                    
+                    <div class="next_buttons"><div class="next_btn_link"><a href="#" class="next_btn_link" id="next_button" onclick="nextSteps(3)"></a></div></div>                    
+                    </div>
+                        </fieldset>
+                        <fieldset class="step">                         
+	
+				
+                        </fieldset>
+                        <fieldset class="step">
+                        <div class="clear"></div>
+                        <div><img src="/static/images/sep.png" alt="" /></div>
+				 
+				<div class="event_date_left">
+				<h3>Event location, plase fill in the form</h3>
+				<span>Please fill in the form below, set the event location. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</span>
+				
+				</div>
+				<div class="event_date_right">
+				  <table width="462" border="0">
+                    <tr>
+                      <td width="217">
+                      <label>
+                       <select  name="country" id="country" onchange="LoadStates(this.value)"> 
+                         <option>Select Country</option>
+                         <?php foreach($this->countries as $key=>$value) { ?>
+                         <option value="<?=$value['country_code']?>" <?php if(strtolower(trim($value['country_code']))== strtolower(trim($this->eventdetail['country']))){ echo " selected";} ?>><?=$value['country_name']?></option>
+                         <? } ?>                         
+                       </select>
+                      </label>
+                      <td width="235" id="divstates">
+                                            
+                      <?php if($this->stateindb){ ?>
+                      <select  name="state" id="state"> 
+                         <option value="">Select State</option>
+                         <?php foreach($this->states as $key=>$value) { ?>
+                         <option value="<?=$value['state_code']?>" <?php if(strtolower(trim($value['state_code']))== strtolower(trim($this->eventdetail['state']))){echo " selected='selected' ";}?> ><?=$value['state_name']?></option>
+                         <?php } ?>                         
+                      </select>
+                      <?php } else { ?>
+                      <input type="text" name="state" id="state" class="date_loc_field" value="<?php echo $this->eventdetail['state']; ?>" onfocus="if (this.value == \'State/province...\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'State/province...\';}"   />
+                      <?php } ?>                      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label>
+       <input type="text" name="city" id="city" class="date_loc_field"  value="<?php echo $this->eventdetail['city']; ?>" onblur="if (this.value == '') {this.value = 'City...';}" onfocus="if (this.value == 'City...') {this.value = '';}" />
+    </label></td>
+                      <td><label>
+       <input type="text" name="postal_code" id="postal_code"  class="date_loc_field"  value="<?php echo $this->eventdetail['zip']; ?>" onblur="if (this.value == '') {this.value = 'Zip Code...';}" onfocus="if (this.value == 'Zip Code...') {this.value = '';}" />
+    </label></td>
+                    </tr>
+                  </table>
+				</div>    
+					<div><img src="/static/images/sep.png" alt="" /></div>	
+				<div class="event_date_left">
+				<h3>Event start and end dates.</h3>
+				<span>Please fill in the form below, set the event start date and hour, and the event end date and hour. Lorem ipsum dolor sit.</span>
+				
+				</div>
+				<div class="event_date_right"><table width="460" border="0">
+                <tr>
+                <td valign="middle" align="right" >TimeZone:&nbsp;</td>
+                <td valign="middle" align="left" colspan="4"><h6><?php echo $this->usertimezone; ?></h6></td>
+                </tr>
+  <tr>
+    <td width="88" align="right" valign="middle">Event start:</td>
+    <td width="131"><input type="text" name="start_date" id="start_date" value="<?php echo $this->eventdetail['start_date']; ?>"  class="event-smalltextfield" /></td>
+    <td width="43"><img class='start_date_button_trigger' id='start_date_button_trigger' src="/static/images/cal_icon.png" alt="" width="23" height="26" /></td>    
+    <td width="25" align="right">At:</td>
+    <td width="126"><input type="text" name="start_time" id="start_time" value="<?php echo $this->eventdetail['start_time']; ?>"  class="event-smalltextfield" onblur="magicTime(this)" onfocus="if (this.className != 'error') this.select()" /></td>
+    <td width="43"><img class='start_time_button_trigger' id='start_time_button_trigger' src="/static/images/clock_icon.png" alt="" width="25" height="26" /></td>
+  </tr>
+  <tr>
+    <td align="right">Event end:</td>
+    <td><input type="text" name="end_date" id="end_date" value="<?php echo $this->eventdetail['end_date']; ?>"  class="event-smalltextfield"  /></td>
+    <td width="43"><img class='end_date_button_trigger' id='end_date_button_trigger' src="/static/images/cal_icon.png" alt="" width="23" height="26" /></td>
+    <td align="right">At:</td>
+    <td><input type="text" name="end_time" id="end_time" value="<?php echo $this->eventdetail['end_time']; ?>" class="event-smalltextfield" onblur="magicTime(this)" onfocus="if (this.className != 'error') this.select()" /></td>
+    <td><img class='end_time_button_trigger' id='end_time_button_trigger' src="/static/images/clock_icon.png" alt="" width="23" height="26" /></td>
+  </tr>
+</table></div>	
+				
+
+				<div><img src="/static/images/sep.png" alt="" /></div>
+<div class="event_date_left">
+				<h3>Host organization and event type.</h3>
+				<span>Select the host organization and the type of event. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</span>
+				
+				</div>
+				<div class="event_date_right"><table width="462" border="0">
+                    <tr>
+                      <td width="217">
+                      <?php if(empty($this->orgdetail)){?>
+            			<!-- ORGANIZER -->
+            			<div class="panel_head1">Step 6: Add Host</div>	
+            			<div id="organizerForm" >
+            				<div class="panel_head4">Organization Name</div>
+            				<div class="panel_body">
+            					<textarea rows="1" cols="35" style="width:260px; font-family: Helvetica, Arial, sans-serif; font-size:10pt; font-style:normal; overflow:hidden;"  name="organization_name" id="organization_name" maxlength="250" ></textarea>
+            				</div>
+            				<div class="panel_head4">Organization Description</div>
+            				<div class="panel_body">
+            
+            					<textarea name="organization_desc" id="organization_desc" style="width: 240px; height: 200px;" ></textarea>
+            <br /><br />
+            				</div>
+            			</div><!-- end panel_body -->
+                        <? } else { ?>
+                        <select name="savedOrganizers" id="OrganizerMenu" class="date_loc_field">						
+                            <option value="<?$value['id']?>">Select Organization</option>
+                            <?php foreach($this->orgdetail as $key=>$value) { ?>
+                            <option value="<?=$value['id']?>" <?php if($this->eventdetail['oid']==$value['id']){ echo " selected";} ?>><?=$value['organization_name']?></option>
+                            <? } ?>
+    					</select>
+                        <? } ?>
+                      </td>
+                      <td width="235">
+                      <label>
+                      <select name="category" id="CategoriesMenu" class="date_loc_field">						
+                            <option value="0">Select Category</option>
+                            <?php foreach($this->categoriesdetail as $key=>$value) { ?>
+                            <option value="<?=$value['id']?>" <?php if($this->eventdetail['category']==$value['id']){ echo " selected";} ?>><?=$value['category']?></option>
+                            <? } ?>
+    					</select>                               
+                     </label>
+                     </td>
+                    </tr>
+                    
+                  </table>
+				</div>
+				<div><img src="/static/images/sep.png" alt="" /></div>
+				
+				
+				<div class="clear"></div>
+				<div class="back_next_buttons">
+					<div class="back_buttons"><div class="back_btn_link"><a href="#" class="back_btn_link" id="back_button" onclick="backSteps(1)"  ></a></div></div>                    
+                    <div class="next_buttons"><div class="next_btn_link"><a href="#" class="next_btn_link" id="next_button" onclick="nextSteps(5)" ></a></div></div>                    
+                </div>
+				
+                        </fieldset>
+                        <fieldset class="step">                         
+	
+				
+                        </fieldset>
+						<fieldset class="step">
+                        
+                        <div id="tickets_leftcolum">
+                    	   <h3>Ticket title</h3>
+                    	   <span>Please add a ticket title. You may add additional tickets, this will help to distinguish them.</span>
+                    	   <label>
+                           <input type="text" name="ticket_title" id="ticket_title" class="date_loc_field"  />
+                        </label>                    	
+                    	<h3>Ticket price, and stuff</h3>
+                    	<span>Please set the price of the ticket. You can choose from many different options, like currency, donation, free, fixed price etc.</span>
+                    	<table width="452" border="0">
+                      <tr>
+                        <td width="30">Cost:</td>
+                        <td width="236"><label>
+                           <select name="ticket_price_type" id="ticket_price_type" class="date_loc_field">
+                             <option value="free">Free</option>
+                             <option value="dollar">Fixed Price</option>
+                             <option value="donate">Donate</option>         
+                           </select>
+                        </label></td>
+                        <td width="40">Price:</td>
+                        <td width="128"><input type="text" name="ticket_price" id="ticket_price" value="0" class="event-smalltextfield"  /></td>
+                      </tr>
+                      <tr>                        
+                        <td width="40">Quantity:</td>
+                        <td width="128"><input type="text" name="ticket_quantity" id="ticket_quantity" class="event-smalltextfield"  /></td>
+                        <td width="168" colspan="2"><div><div class="save_bt_link"><a href="#" class="save_bt_link" id="save_ticket" onclick="SaveTicket(1)"></a></div></div></td>
+                        
+                      </tr>
+                                           
+                    </table>
+					</div>
+					<div id="vert_line"><img src="/static/images/vert_line.png" alt="" /></div>
+					<div id="ticket_rightcolum">
+					<h3>Saved tickets</h3>
+					<span>Here you can see the list of tickets that you saved. Hover with your mose to see further actions you can perform on the tickets, like view, edit, delete. Lorem ipsum something in latin.</span>
+					<div id="event_tickets"></div>                                
+					</div>					
+                    <div id="wrapper">
+                		<div class="accordionButton"><img src="/static/images/show_advance_setting.png" alt="" /></div>
+                		<div class="accordionContent">
+                        <div id="ticket_detail" style="clear:both;">
+                          <table width="550" border="0"> 
+                            <tr>
+                              <td>Start </td>
+                              <td><input type="text" name="ticket_start_sale_date"  class="event-smalltextfield" id="ticket_start_sale_date" /></td>
+                              <td>End</td>
+                              <td><input type="text" name="ticket_end_sale_date"  class="event-smalltextfield" id="ticket_end_sale_date" /></td>
+                            </tr>
+                            <tr>
+                              <td>Min</td>
+                              <td><input type="text" name="ticket_min_order"  class="event-smalltextfield" id="ticket_min_order" /></td>
+                              <td>Max</td>
+                              <td><input type="text" name="ticket_max_order"  class="event-smalltextfield" id="ticket_max_order" /></td>
+                            </tr>
+                            <tr>
+                              <td colspan="4">Description</td>
+                            </tr>
+                            <tr>
+                              <td colspan="4">
+                                <textarea name="ticket_description" cols="200" rows="10"></textarea> 
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        
+                        </div>                		
+                	</div>
+                    <div class="clear"></div>
+                    <div class="back_next_buttons">
+    					<div class="back_buttons"><div class="back_btn_link"><a href="#" class="back_btn_link" id="back_button" onclick="backSteps(3)"  ></a></div></div>                   
+                                            
+                    </div>
+						<div style="margin-left:350px; margin-top:50px;">
+							<div class="edit_event_bt_link"><a href="#" class="edit_event_bt_link" id="edit_event" ></a></div>
+							<div class="cancel_bt_link"><a href="#" class="cancel_bt_link" id="cancel_event"></a></div>
+						
+						</div>
+                        
+                        </fieldset>
+                        <fieldset class="step">                         
+	
+				
+                        </fieldset>
+                        <fieldset class="step">                         
+	                    <div id="preview_event" style="width: 900px; height: 800px; overflow: hidden; "></div>   
+				        <div style="margin-left:350px; margin-top:50px;">
+							<div class="create_event_bt_link"><a href="#" class="edit_event_bt_link" id="edit_event" ></a></div>
+							<div class="cancel_bt_link"><a href="#" class="cancel_bt_link" id="cancel_event"></a></div>
+						
+						</div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="num_wrapper">
+                  <ul class="num">
+                    <li class="one_select"><a href="#">Home</a></li>
+                    <li class="arrow_bottom">&nbsp;</li>
+                    <li class="two"><a href="#">About</a></li>
+                    <li class="arrow_bottom">&nbsp;</li>
+                    <li class="three"><a href="#">Services</a></li>
+                    <li class="arrow_bottom">&nbsp;</li>
+                    <li class="efour"><a href="#">Contact</a></li>
+                  </ul>
+                  <div class="clear"></div>
+                  <div class="event_text"><img src="/static/images/event_text.png" alt="" /></div>
+                  <div class="date_text"><img src="/static/images/date_text.png" alt="" width="113" height="16" /></div>
+                  <div class="ticket_text"><img src="/static/images/ticket_text.png" alt="" width="54" height="16" /></div>
+                  <div class="create_text" style="padding-left: 30px;"><img src="/static/images/save_text.png" alt=""  /></div>
+                </div>                           
+                
+            </div>  
+  
+  
+        
+					
+				
+				
+    </div>
+</div>
+<?php if($this->ticket_count){?>
+<script type="text/javascript">
+LoadTickets(<?php echo $this->eid; ?>);
+</script>
+<? } ?>   
+<script type="text/javascript">
+//<![CDATA[
+
+	CKEDITOR.replace( 'description',
+	{
+		fullPage : false,
+        width    : "700",
+        height   : "170"
+        
+		
+	});
+    
+    CKEDITOR.replace( 'ticket_description',
+	{
+		fullPage : false,
+        toolbar  : 'Basic',
+        height   : "170"
+        		
+	});
+
+ 
+$(function(){
+
+//$("form").form();
+//$('select').selectmenu();
+$('select#country').selectmenu({style:'dropdown',width: 220, menuWidth:220, maxHeight: 250, change:function(){ /*alert("value: "+ $(this).val())*/  }});
+$('select#state').selectmenu({style:'dropdown',width: 220, menuWidth:220, maxHeight: 250 });
+$('select#city').selectmenu({style:'dropdown',width: 220, menuWidth:220, maxHeight: 250 });
+
+$('select#OrganizerMenu').selectmenu({style:'dropdown',width: 220, menuWidth:220, maxHeight: 250 });
+
+$('select#CategoriesMenu').selectmenu({style:'dropdown',width: 220, menuWidth:220, maxHeight: 250 });
+/*
+$('#event-style').bxSlider({
+    infiniteLoop: false,
+    hideControlOnEnd: true,
+    displaySlideQty:7,
+    moveSlideQty:7
+});
+*/
+$('#mycarousel').jcarousel({ scroll:5,visible:7 });
+
+
+
+
+/*
+$(".theme_preview").hover( 
+    function () {
+    $(".theme_preview").colorbox({ width:'400',height:'400'}).mouseover(function(){ $(this).click();  });     
+    },  
+    function () {
+    $.colorbox.close();
+    //$(".theme_preview").colorbox({ width:'400',height:'400'}).mouseover(function(){ $(this).click();  });        
+    } 
+);
+*/
+
+
+
+$(".theme_preview").colorbox({width:'800',height:'600'});
+/*
+$("#theme_preview").hover( 
+function () {
+    //alert(this.rel);
+    $(".theme_preview"+this.rel).colorbox({width:'800',height:'600'}).mouseover(function(){ alert('a'); $(this).click();  });
+    //$(".theme_preview"+this.rel).colorbox({width:"800",height:"800"}); 
+    //$.colorbox({rel:"theme_preview",width:"800",height:"800", open:true, onOpen:function(){alert(this.id)},   onLoad:function(){ $("#cboxTitle").removeClass().addClass("general"); }}); 
+    },  
+function () { 
+    } 
+);
+*/
+/*
+$(".themes").hover(
+  function () { alert('aaa');
+    $(".theme_preview").colorbox({ photo:true, rel:'theme_preview'});
+    
+    //$.colorbox({rel:"theme_preview",width:"800",height:"800"}); 
+    //$(this).append($("<span> ***</span>"));
+  }, 
+  function () {
+    //$.colorbox.close();
+    //$(this).find("span:last").remove();
+  }
+);
+*/
+
+});
+//]]>
+</script>
+<?php if($this->eventdetail['theme']){?>
+<script type="text/javascript">
+
+$("#theme_<?php echo $this->eventdetail['theme'];?>").css({
+  position:'relative',
+  top: 0  ,
+  left: 0,          
+});
+
+var position = $("#theme_<?php echo $this->eventdetail['theme'];?>").position();       
+
+$("#theme_<?php echo $this->eventdetail['theme'];?>").css({
+  position:'relative',
+  top: -55  ,
+  left: 45
+});
+
+$("#theme_<?php echo $this->eventdetail['theme'];?>").addClass("theme_selected");
+
+$("#selected_theme").val('<?php echo $this->eventdetail['theme'];?>');
+
+//LoadStates('<?php echo $this->eventdetail['country'];?>',)
+</script>
+<?php } ?>

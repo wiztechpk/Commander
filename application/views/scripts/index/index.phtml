@@ -1,0 +1,85 @@
+<div id="content">
+    <div class="maincontent-inner">        	
+        <?php if(!empty($this->result)){?>
+        <div id="content-listing">
+          <div class="categories-container">
+          <h4>Event Types</h4>
+          <?php $ii=0; foreach($this->result as $key=>$value) {  ?>
+           	<div class="categories-box"><a href="/events/?cid=<?=$value['id']?>"><h5><?=$value['category']?></h5></a></div>
+            <? //if($ii%2===0) {echo "<br />"; }?>
+          <? $ii++; } ?>
+          <div style="clear: both; float: right;"><a href="/events/">View All</a></div>
+          </div>          
+        </div>
+        <? } ?>
+        
+        <?php if(!empty($this->result1)){?>
+        
+        <div id="content-listing">
+          <?php foreach($this->result1 as $key=>$value) { ?>   
+   	      <div class="listing-container">
+          <div class="listing-img">
+            <?php if(empty($value['logo'])){?>
+            <img src="event_logos/default-logo.png" />
+            <?php } else {?>
+            <img src="/event_logos/<?php echo $value['logo']; ?>" width="60" height="60"  />            
+            <? } ?>            
+            </div>
+            <div class="prolog-listing">
+            	<a href="/eventdetail/?id=<?=$value['id']?>"><h3><?=$value['title']?></h3></a>
+                <div><p><?=truncate($value['description'], 300, '...', false, true)?></p></div>
+            </div>
+			<div class="listing_date"><?=$value['start_date']?></div>
+			<div class="listing_bt"><a href="/eventdetail/?id=<?=$value['id']?>" class="button small blue"><span>[Attend]</span></a></div>			                            
+          </div>
+          <? } ?>
+        </div>
+        <? } ?> 
+    </div>
+</div>
+<script type="text/javascript">
+   $(document).ready(function() {
+	   		//Corner Setting for IE8
+	   		$("#slideshow-wrapper").corner("8px");
+	   
+	   		//Twitter Jquery Setting
+			$("#twitter").getTwitter({
+				userName: "Indoneztheme",
+				numTweets: 1,
+				loaderText: "Loading tweets...",
+				slideIn: true,
+				slideDuration: 750
+		}); 
+			//Front Testimonials Setting    
+        	$('.front-testimonials ul').cycle({
+				timeout: 5000, 
+				fx:      'fade', 
+				pager:   '#pager', 
+				pause:   true,	
+				cleartypeNoBg: true, 
+				pauseOnPagerHover: 0
+        });
+     });
+	 
+			//S3Slider Setting   
+			$(document).ready(function() {
+				$('#s3slide').s3Slider({
+					timeOut: 6000 
+				});
+			});
+
+	//Login Colorbox
+	$(document).ready(function(){				
+		$(".login").colorbox({width:"400px"});				
+	});
+
+    // Background Slide Setting    
+	var scrollSpeed = 50; // speed in milliseconds	
+	var current = 0; // set the default position	
+	var direction = 'h'; // set the direction
+	function bgscroll(){
+	    current -= 1;  
+	    $('div#glow-bg').css("backgroundPosition", (direction == 'h') ? current+"px 0" : "0 " + current+"px");   
+	}
+	 setInterval("bgscroll()", scrollSpeed);	
+</script>

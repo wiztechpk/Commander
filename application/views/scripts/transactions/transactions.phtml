@@ -1,0 +1,74 @@
+<div id="content">
+	<div class="maincontent">
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <link href="/static/css/account.css" rel="stylesheet" type="text/css" /> 
+    <div id="col_210">
+		<div id="sidenav">
+        	<ul>
+        		<li class="text">Your Account</li>
+                <li class="tab"><a href="/account">Contact Info</a></li>
+                <li class="tab"><a href="/password">Password</a></li>
+                <li class="tab"><a href="/invoices">Invoices</a></li>
+                    <li class="tab_live"><a href="/transactions">Transactions</a></li>
+                    <li class="tab"><a href="/receipts">Receipts</a></li>
+                    <li class="tab"><a href="/membershipstatus">Membership status</a></li>
+                
+                <li class="tab"><a href="/account-close">Close Account</a></li>        
+        	</ul>
+        </div><!-- end sidenav -->
+	</div>
+    
+    <div class="animatedtabs" style="overflow: visible;">
+      <ul>
+        <li><a href="/transactions/transactions" title="Transactions"><span>Transactions</span></a></li>
+        <li><a href="/transactions/receipts"    title="Receipts"><span>Receipts</span></a></li>
+        <li><a href="/transactions/membershipstatus"   title="Membership Status"><span>Membership Status</span></a></li>
+        
+      </ul>
+    </div> 
+    
+    <div style="float: left; height: 20px; width: 700px; padding-top: 20px; padding-bottom: 5px;  ">Ticket Sold Transactions</div>
+    <div id="invoiceListing">
+    <div id="eventName">Event Title</div>
+    <div id="eventDate">Event Date</div>    
+    <div id="eventDate">Total Quantity</div>
+    <div id="eventStatus">Total Amount</div>
+    
+    <div style="clear:both;"></div>
+    <?
+    $dbAdapter              =   Zend_Db_Table::getDefaultAdapter();
+    $sql                    =   "SELECT * FROM `events` e LEFT JOIN `orders` o ON e.id=o.eid WHERE e.coordinator = '".Zend_Auth::getInstance()->getIdentity()->id."'";
+    $result                 =   $dbAdapter->fetchAll($sql); 
+    foreach($result as $value) {                            
+    ?>    
+    <div class="" id="myevent<?php echo $value['id']; ?>" >
+    <div class="eventUnderName"><?php echo $value['title']; ?></div>
+    <div class="eventUnderDate"><?php echo $value['start_date']; ?></div>     
+    <div class="eventUnderDate"><?php echo $value['total_quantity']; ?></div> 
+    <div class="eventUnderStatus"><?php echo $value['total_amount']; ?></div>
+       
+     
+    </div>
+    <div style="clear:both;"></div> 
+    <? 
+    }       
+    ?>
+    </div>
+      
+    
+   
+    
+</div>
+<!-- end content -->

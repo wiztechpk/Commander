@@ -1,0 +1,88 @@
+<div id="content">
+	<div class="maincontent">
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <link href="/static/css/account.css" rel="stylesheet" type="text/css" /> 
+    <div id="col_210">
+		<div id="sidenav">
+        	<ul>
+        		<li class="text">Your Account</li>
+                <li class="tab"><a href="/account">Contact Info</a></li>
+                <li class="tab"><a href="/password">Password</a></li>
+                <li class="tab"><a href="/invoices">Invoices</a></li>
+                    <li class="tab"><a href="/transactions">Transactions</a></li>
+                    <li class="tab"><a href="/receipts">Receipts</a></li>
+                    <li class="tab_live"><a href="/membershipstatus">Membership status</a></li>
+                
+                <li class="tab"><a href="/account-close">Close Account</a></li>        
+        	</ul>
+        </div><!-- end sidenav -->
+	</div>
+    <div class="animatedtabs" style="overflow: visible;">
+      <ul>
+        <li><a href="/transactions" title="Transactions"><span>Transactions</span></a></li>
+        <li><a href="/receipts"    title="Receipts"><span>Receipts</span></a></li>
+        <li class="selected"><a href="/membershipstatus"   title="Membership Status"><span>Membership Status</span></a></li>        
+      </ul>
+    </div>      
+    <?php
+    $rowstyle               =   "class= 'horizontalbar1'";
+    $dbAdapter              =   Zend_Db_Table::getDefaultAdapter();
+    $sql                    =   "SELECT msh.title AS title, msh.number AS total_events, (SELECT COUNT(e.id) FROM `events` e WHERE e.coordinator = m.id ) AS event_posted, DATE_FORMAT(m.date_created, '%m/%d/%Y') AS membershipdate, DATE_FORMAT(DATE_ADD(m.date_created, INTERVAL 1 YEAR), '%d-%m-%Y') AS billingdate FROM members m INNER JOIN membership msh ON m.membership_id=msh.id WHERE m.id = '".Zend_Auth::getInstance()->getIdentity()->id."' ";
+    $result                 =   $dbAdapter->fetchAll($sql);
+    if(!empty($result)){                             
+    ?>
+    <div style="float: left; height: 20px; padding-top: 15px; width: 700px; "><h5>Membership Transactions</h5></div>
+    <div id="MembershipStatusListing">
+    <div id="eventName">Membership package</div>
+    <div id="eventStatus">Available events</div>    
+    <div id="eventStatus">Posted events</div>
+    <div id="eventDate">Date of membership</div>
+    <div id="eventDate">Next Billing Date</div>
+    <div style="clear:both;"></div>   
+    <div style="height: 2px; border-bottom: #DADADA solid ;  ">&nbsp;</div> 
+    <?php     
+    foreach($result as $value) {                            
+    ?> 
+    <div class="" id="myevent1" >
+    <div class="eventUnderName"><?php echo $value['title']; ?></div>
+    <div class="eventUnderStatus"><?php echo ($value['total_events']-$value['event_posted']); ?></div>     
+    <div class="eventUnderStatus"><?php echo $value['event_posted']; ?></div> 
+    <div class="eventUnderDate"><?php echo $value['membershipdate']; ?> </div>
+    <div class="eventUnderDate"><?php echo $value['billingdate']; ?> </div>    
+    </div>
+    <div style="clear:both;"></div>
+    <?php 
+    $rowstyle == "class= 'horizontalbar1'" ? $rowstyle = "class= 'horizontalbar2'" : $rowstyle = "class= 'horizontalbar1'";
+    }       
+    ?>
+    <div style="float: right; text-align: right; height: 15px; width: 700px; padding-top: 5px; padding-bottom: 5px;"><a href="/transactions/ticketorder"> View All </a></div>
+    <div style="height: 5px;"><hr /></div>
+    </div>    
+    <?php } else {?>
+    <div style="float: left; height: 20px; width: 700px; text-align: center;">There are no records</div>
+    <div style="height: 5px;"><hr /></div>
+    <?php } ?>
+    </div> 
+</div>
+
+    
+	
+
+
+
+
+	<!-- end content -->
+	
+

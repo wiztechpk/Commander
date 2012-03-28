@@ -1,0 +1,49 @@
+<!-- BEGIN OF MAINMENU -->
+<?php
+$auth = Zend_Auth::getInstance();
+if ($auth->hasIdentity())
+{                
+?>
+<div id="menu-wrapper">
+    <div id="menu-container">
+        <div id="logo"><a href="/index"><img src="/static/images/logo.png" alt="" /></a></div>
+        <div id="mainmenu">
+            <ul id="menu">
+                <li class="current"><a href="/index">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>                
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>                
+                <li><a href="#">Welcome <?php echo $auth->getIdentity()->first_name." ".$auth->getIdentity()->last_name; ?></a>
+                    <ul> 
+                    	<li><a href="/createevent">Create Event</a></li>                           
+                        <li><a href="/myevents">My Events</a></li>
+                        <li><a href="/deletedevents">My Deleted Events</a></li>
+                        <li><a href="/myprofile">My Profile</a></li>
+                        <li><a href="/mytickets">My Purchased Tickets</a></li>
+                        <li><a href="/account">My Account</a></li>                        
+                    </ul>
+                </li>                
+            </ul>
+        </div>   
+        <div id="logout-wrapper"><a class="logout" href="/logout/index" id="logout-button" target="_top"><span>Logout</span></a></div>        
+    </div>    
+</div>
+<?php } else {?>
+<div id="menu-wrapper">
+    <div id="menu-container">
+        <div id="logo"><a href="/index"><img src="/static/images/logo.png" alt="" /></a></div>
+        <div id="mainmenu">
+            <ul id="menu">
+                <li class="current"><a href="/index">Home</a></li>
+                <li><a href="/about">About</a></li>                
+                <li><a href="/services">Services</a></li>                
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>        
+        <div id="login-wrapper"><a class="login" href="/login/index" id="login-button" target="_top"><span>Login</span></a></div>
+    </div>    
+</div>
+<?php } ?>
+<!-- END OF MAINMENU -->

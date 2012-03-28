@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo $this->layout()->headtitle;?></title>
+
+<!-- ////////////////////////////////// -->
+<!-- //      Start Stylesheets       // -->
+<!-- ////////////////////////////////// -->
+<link href="/static/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<?php echo $this->layout()->customstyleccs;?>
+<link href="/static/css/colorbox.css" rel="stylesheet" type="text/css" media="screen" />
+<!--<link href="/static/css/fancybox.css" rel="stylesheet" type="text/css" media="screen" />-->
+<link href="/static/css/noscript.css" rel="stylesheet" type="text/css" media="screen,all" id="noscript" />
+
+<link href="/static/css/zebra_form.css" rel="stylesheet" type="text/css" /> 
+
+<link href="/static/css/jquery-ui-redmond.css" rel="stylesheet" type="text/css" /> 
+
+<link href="/static/css/jquery.miniColors.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/colorpicker.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/fblistselection.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/jquery-ui-selectmenu.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/jquery.jcarousel.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/jquery.tipTip.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/website.css" rel="stylesheet" type="text/css"/> 
+<link href="/static/css/jquery.ui.timepicker.css" rel="stylesheet" type="text/css" />
+
+<!-- ////////////////////////////////// -->
+<!-- //      Javascript Files        // -->
+<!-- ////////////////////////////////// -->
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/sliding.form.js"></script>
+<script type="text/javascript" src="/static/js/scroll.js"></script>
+<script type="text/javascript" src="/static/js/jquery.twitter.js"></script>
+<script type="text/javascript" src="/static/js/dropdown.js"></script>
+<script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+<script type="text/javascript" src="/static/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="/static/js/jquery.corner.js"></script>
+<script type="text/javascript" src="/static/js/s3Slider.js"></script>
+
+<script type="text/javascript" src="/static/js/colorpicker.js"></script>
+<script type="text/javascript" src="/static/js/jquery.miniColors.js"></script>
+
+<script type="text/javascript" src="/static/js/fblistselection.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+
+
+<script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+<!--<script type="text/javascript" src="/static/js/jquery.fancybox.js"></script>-->
+<script type="text/javascript" src="/static/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="/static/js/jquery.corner.js"></script>
+
+<!-- ////////////////////////////////// -->
+<!-- //      Uploadify Files        // -->
+<!-- ////////////////////////////////// -->
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl();?>/static/js/jqueryuploadify/uploadify.css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/static/js/jqueryuploadify/swfobject.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl();?>/static/js/jqueryuploadify/jquery.uploadify.v2.1.4.js"></script>
+
+<script type="text/javascript" src="/static/js/zebra_form.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+
+<script language="Javascript" type="text/javascript" src="<?php echo $this->baseUrl();?>/static/js/jquery-ui-timepicker.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.tipTip.js"></script>  
+
+<script type="text/javascript" src="/static/js/jquery-ui-enhanced-form.js"></script>    
+
+<script type="text/javascript" src="/static/js/jquery-ui-selectmenu.js"></script>
+
+<script type="text/javascript" src="/static/js/ckeditor/ckeditor.js"></script>
+
+<!--<script type="text/javascript" src="/static/js/jquery.meio.mask.js"></script>-->
+<script type="text/javascript" src="/static/js/jquery.maskedinput.js"></script>
+
+<script type="text/javascript" src="/static/js/date.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tinyscrollbar.js"></script>
+<script type="text/javascript" src="/static/js/timeparse.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.ui.timepicker.js"></script>
+
+<script type="text/javascript" src="/static/js/functions.js"></script>
+
+</head>
+<body>
+<div id="container">
+<?php 
+if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == "index")
+{
+?>
+        <div id="top-container">
+        <div id="glow-bg">
+        <?=$this->render('menu.phtml')?>
+        <?=$this->render('header.phtml')?>
+        <?=$this->layout()->content?>
+        <?=$this->render('footer.phtml')?>
+        </div>   
+        </div>    
+        
+<?        
+}
+else if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == "createevent" || Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == "editevent")
+{
+?>
+        
+        <div >
+        <?=$this->render('menu.phtml')?>
+        
+        <?=$this->layout()->content?>
+        </div>
+           
+        
+        
+<?
+}
+else
+{
+?>    
+        <div id="top-container-inner">
+        <div id="glow-bg-inner">
+        <?=$this->render('menu.phtml')?>
+        <?=$this->render('header_inner.phtml')?>
+        <?=$this->layout()->content?>
+        <?=$this->render('footer.phtml')?>
+        </div>   
+        </div>       
+<?
+}
+?>       	       
+</div>
+<script type="text/javascript">$('#noscript').remove();</script>
+</body>
+</html>

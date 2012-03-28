@@ -1,0 +1,49 @@
+<div id="content">
+	<div class="maincontent">
+    
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <?php if(!empty($this->result)){?>
+    <div id="eventticketListing">
+    <div id="eventticketTicket">Ticket Title</div> 
+    <div id="eventticketQuantity">Ticket Quantity</div>    
+    <div id="eventticketPrice">Ticket Price</div>
+    <div id="eventticketSold">Ticket Sold</div>
+    <div id="eventticketActions">Actions</div>
+    <div style="clear:both;"></div>
+    <div style="height: 2px; border-bottom: #DADADA solid ;  ">&nbsp;</div>
+    <div style="clear:both;"></div>
+    <?php 
+    foreach($this->result as $key=>$value)
+    {        
+    ?>
+    <div class="eventbar" id="myevent<?php echo $value['id']; ?>" onMouseOut="HideMyEventHoverBar(<?php echo $value['id']; ?>)" onMouseOver="ShowMyEventHoverBar(<?php echo $value['id']; ?>)" >
+    <div class="eventticketUnderTicket"><?php echo $value['ticket_title']; ?></div>
+    <div class="eventticketUnderQuantity"><?php if($value['ticket_quantity']==0){ echo " Infinite ";}else{ echo $value['ticket_quantity'];}?></div>     
+    <div class="eventticketUnderPrice"><?php if($value['ticket_price']==0){ echo " Free ";}else{ echo "$".$value['ticket_price'];}?></div> 
+    <div class="eventticketUnderSold"><?php echo $value['ticket_sold']; ?></div> 
+    <div class="eventticketUnderActions" id="action<?php echo $value['id']; ?>" style="display: none;" >
+      <div><div id="tag-ticket"><p><a title="Ticket Attendee" href="/eventattende?eid=<?php echo $value['pid']; ?>&tid=<?php echo $value['id']; ?>" class="press-it-btn"></a></p></div></div>
+    </div>     
+    </div> 
+    <div style="clear:both;"></div>    
+    <?php 
+    }       
+    ?>
+    </div>  
+    <?php } else {?>
+    <div style="text-align: center;">There are no records</div>
+    <?php } ?>
+	</div>
+</div>

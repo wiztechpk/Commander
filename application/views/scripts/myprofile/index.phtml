@@ -1,0 +1,140 @@
+<div id="content">
+	<div class="maincontent">
+    
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <link href="/static/css/myprofile.css" rel="stylesheet" type="text/css" />         
+    
+    <div class="organizer_buttons">        
+        <select name="myoid" id="myoid" onchange="submitOrg(this.value)">        
+        <?php foreach($this->orgdetail as $key=>$value) { ?>
+        <option value="<?=$value['id']?>" <?php if($value['id']==$_REQUEST['oid'])echo " selected"; ?>   ><?=$value['organization_name']?></option>        
+        <? } ?>        
+        </select> 
+        
+        <a class="button small blue" href="/myprofile/create/"><span>[Create A new profile]<span></a>
+              
+        <div class="clear"></div>
+    </div>
+    <form enctype="multipart/form-data" accept-charset="utf-8" method="POST" action="/myprofile/?oid=1502667554" id="organizer_form">
+
+    
+    <input type="hidden" name="oid" value="<?php echo $this->oid?>"  /> 
+    <div class="module_wrapper" id="my_profile_wrapper">
+        <div class="module_header">            
+            <div class="icon"><img src="http://evbdn.eventbrite.com/s3-build/3556-rc09-14-97a4c53/django/images/icons/people-icon.png"></div>            
+        </div>
+        <div class="module_content" id="my_profile">
+            
+
+    <div class="top">
+        <div class="name_logo">
+            <div class="name">
+                <h2>Organizer name</h2>
+                <div class="text"><input type="text" value="<?php echo $this->organization_name; ?>" name="organization_name" id="organization_name" ></div>
+                
+            </div>            
+            <div class="logo">
+                <h2>Organizer logo</h2>
+                <div class="logo_inner">
+                    <div class="logo_inner_inner">
+                        <div class="crop">
+                               <div id="organization_logo">
+                               <?php if(empty($this->organization_logo)){?>
+                               <img src="http://evbdn.eventbrite.com/s3-build/3556-rc09-14-97a4c53/django/images/icons/default-organizer-logo.png">
+                               <?php } else {?>
+                               <img src="organization_logos/<?php echo $this->organization_logo?>" />
+                               <input type="hidden" value="<?php echo $this->organization_logo; ?>" name="event_logo">
+                               <? } ?>
+                               </div>
+                        </div>
+                    </div>
+                </div>
+                <div>Your image must be JPG, GIF, or PNG format and not exceed 1MB. It will be resized to make its width 225px.</div>
+                <div class="browse ff pc">
+                
+                <div id="organization_logo_file"></div>             
+                
+                </div>                
+            </div>
+            
+        </div>
+
+        <div class="description">
+            <h2>About the organizer</h2>
+            <textarea name="organization_description" cols="40" rows="10" id="organization_description" ><?php echo $this->organization_description; ?></textarea>
+            
+            <div class="save_both"><input type="checkbox" id="id_single_desc" checked="checked" name="single_desc" > <label for="id_single_desc">Also use this description for event pages</label></div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    
+    
+</div>
+
+
+        </div>
+        
+        <div style="clear: both;"></div>
+        <div class="module_wrapper" id="communicate_wrapper">
+        <div class="module_header">            
+            <div class="icon"><img src="https://evbdn.eventbrite.com/s3-build/3581-rc09-14-d44ef10/django/images/icons/social.png"></div>                        
+        </div>
+        <div class="module_content" id="communicate">
+            <div class="social">
+    <h2>Integrate social networking feeds onto my profile page:</h2>
+    <div class="column">
+        <ul>
+            <li><input type="checkbox" id="show_facebook" name="show_facebook" value="1" <?php if($this->show_facebook==1) echo "checked";?>><label for="show_facebook">Add my Facebook page activity feed</label></li>
+            <li class="facebook visible">
+                http://www.facebook.com/<input type="text" id="facebook" value="<?php echo $this->facebook; ?>" name="facebook">
+               
+            </li>
+        </ul>
+    </div>
+    <div class="column">
+        <ul>
+            <li><input type="checkbox" id="show_twitter" name="show_twitter" value="1" <?php if($this->show_twitter==1) echo "checked";?> > <label for="show_twitter">Add my Twitter username or search feed</label></li>
+            <li class="twitter visible">
+                <ul>
+<li><label for="twitter_type"><input type="radio" id="twitter_type" value="0" name="twitter_type" <?php if($this->twitter_type==0) echo "checked";?> > Username</label></li><li class="indent">
+                    <input type="text" id="twitter" value="<?php echo $this->twitter; ?>" name="twitter" >
+                    
+                </li>
+<li><label for="twitter_type"><input type="radio" name="twitter_type" value="1" id="twitter_type" <?php if($this->twitter_type==1) echo "checked";?> > Search query</label> <span style="font-size: 11px;">[<a target="_blank" href="http://search.twitter.com/operators">Help me</a>]</span></li>
+</ul>
+                
+            </li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+        </div>
+    </div>
+     <div>
+             <a class="button small blue" href="javascript:void(0);" onclick="javascript:save_organization('<?php echo $this->oid?>');"><span>[Save Profile]<span></a>
+             <a class="button small blue" target="_blank" href="org/?oid=<?php echo $this->oid?>"><span>[View Profile]<span></a>                                        
+        </div>   
+            
+
+</form>    
+            
+    
+    
+        
+    
+	</div>
+</div>  

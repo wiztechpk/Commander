@@ -1,0 +1,51 @@
+<div id="content">
+  <div class="maincontent-inner">
+  
+  <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <?php if(!empty($this->result)){?>
+    <div id="eventattendeeListing">
+    <div id="eventattendeeTicket">Ticket Title</div>
+    <div id="eventattendeeName">Attende Name</div>
+    <div id="eventattendeeEmail">Attende Email</div>    
+    <div id="eventattendeeCellPhone">Attende Cell phone</div>   
+    <div id="eventattendeeActions">Actions</div> 
+    <div style="clear:both;"></div>
+    <div style="height: 2px; border-bottom: #DADADA solid ;  ">&nbsp;</div>
+    <div style="clear:both;"></div>
+    <?php 
+    foreach($this->result as $key=>$value)
+    {
+    ?>
+    <div class="eventbar" id="myevent<?php echo $value['odid']; ?>" onMouseOut="HideMyEventHoverBar(<?php echo $value['odid']; ?>)" onMouseOver="ShowMyEventHoverBar(<?php echo $value['odid']; ?>)" >
+    <div class="eventattendeeUnderTicket"><?php echo $value['ticket_title']; ?></div>
+    <div class="eventattendeeUnderName"><?php echo $value['attende_name']; ?></div>     
+    <div class="eventattendeeUnderEmail"><?php echo $value['attende_email']; ?></div>
+    <div class="eventattendeeUnderCellPhone"><?php echo $value['attende_cell_phone']; ?></div>
+    <div class="eventattendeeUnderActions" id="action<?php echo $value['odid']; ?>" style="display: none;" >
+      <div class="sep">&nbsp;</div>
+      <div><div id="tag-ticket"><p><a title="Print Ticket" href="/printticket?oid=<?php echo $value['oid']; ?>&odid=<?php echo $value['odid']; ?>&otid=<?php echo $value['otid']; ?>" class="press-it-btn"></a></p></div></div>
+      <div class="sep">&nbsp;</div>
+    </div>    
+    </div> 
+    <div style="clear:both;"></div>        
+    <?php    		        
+    }       
+    ?>
+    </div>
+    <?php } else {?>
+    <div style="text-align: center;">There are no records</div>
+    <?php } ?>    
+  </div>
+</div>

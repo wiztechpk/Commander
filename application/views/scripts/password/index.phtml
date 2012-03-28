@@ -1,0 +1,57 @@
+<div id="content">
+	<div class="maincontent-inner">
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <link href="/static/css/account.css" rel="stylesheet" type="text/css" />
+    <div id="col_210">
+    <div id="sidenav">
+        <ul>
+            <li class="text">Your Account</li>
+            <li class="tab"><a href="/account">Contact Info</a></li>
+            <li class="tab_live"><a href="/password">Password</a></li>
+            <li class="tab"><a href="/invoices">Invoices</a></li>
+            <li class="tab"><a href="/account-close">Close Account</a></li>
+        </ul>
+    </div>
+    </div>        
+    
+    <div class="contact-area"> 
+    <h4>Change Password</h4>                                                                
+    <div id="contactFormArea">                                
+        <!-- Contact Form Start //-->
+        <form name="changepasswordform" id="changepasswordform"  method="post" >
+        <fieldset>        
+        
+        <div class="label-form-inline">
+        <label>Current Password:</label>
+        <input type="password" name="oldpassword" id="oldpassword" size="25"  class="textfield" />
+        </div>
+        <div class="label-form-inline">
+        <label>New Password</label>
+        <input type="password" name="newpassword1"  id="newpassword1"  size="25" class="textfield" />
+        </div>
+        <div class="label-form-inline">
+        <label>Repeat Password:</label>
+        <input type="password" name="newpassword2"  id="newpassword2"  size="25" class="textfield" />
+        </div>                                           
+        
+        <button type="submit" name="submit_changepassword" id="submit_changepassword" class="button-login">Submit</button>
+        <span class="loading" style="display: none;">Please wait..</span>
+        </fieldset> 
+        </form>
+        <!-- Contact Form End //-->                                      
+    </div>       
+    </div> 
+    </div>
+</div>

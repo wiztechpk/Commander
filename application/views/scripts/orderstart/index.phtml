@@ -1,0 +1,296 @@
+<script src="/static/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="/static/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+<div id="content">
+  <div class="maincontent-inner">
+    <div style="float: left; width:600px; margin:5px;">
+    <?php if($this->eventdetail['logo']){?>      
+      <div style="float: left;"><img src="/image?width=190&amp;height=60&amp;image=/event_logos/<?php echo $this->eventdetail['logo']; ?>" alt="<?php echo $this->eventdetail['title']; ?>" /></div>
+    <? } ?>    
+    <h3 style="float: left; margin-top: 15px; "><?php echo $this->eventdetail['title']; ?></h3></div>
+    
+    <div style="float:left; width:600px;">
+      <div class="event-area">
+        <div>
+          
+            <fieldset>
+            <div>
+              <label>
+              <h4>Order Summary</h4>
+              </label>
+              <table width="568" border="0" cellpadding="2" cellspacing="2">
+                <tr>
+                  <td width="294" align="left" class="text2"><strong>Ticket Type</strong></td>
+                  <td width="86" align="center" class="text2"><strong>Price</strong></td>
+                  <td width="92" align="center" class="text2"><strong>Quantity</strong></td>
+                  <td width="70" align="center" class="text2"><strong>Total</strong></td>
+                </tr>
+                <?php foreach($this->ticketdetail as $key=>$value) { ?>
+                <?php if($_REQUEST['quant_'.$value['id']] > 0) {?>
+                <tr>
+				  <td><?=$value['ticket_title']?></td>
+                  <td align="center"><?php if($value['ticket_price']==0){ echo " Free ";}else{ echo "$".$value['ticket_price'];}?></td>
+                  <td align="center"><?php echo $_REQUEST['quant_'.$value['id']];?></td>
+                  <td align="center"><?php if($value['ticket_price']* $_REQUEST['quant_'.$value['id']]==0){ echo " Free ";}else{ echo "$".$value['ticket_price']* $_REQUEST['quant_'.$value['id']];}?></td>
+                </tr>
+                <? $tickets[$value['id']]         =   $_REQUEST['quant_'.$value['id']]; ?>
+                <? $total_quantity  =   $total_quantity  +  $_REQUEST['quant_'.$value['id']]; ?>
+                <? $total_amount    =   $total_amount    +  ($value['ticket_price']* $_REQUEST['quant_'.$value['id']]); ?>
+                <? } ?>
+                <? } ?>                                                
+                <tr>
+                  <td>&nbsp;</td>
+                  <td colspan="2">Total Amount Due</td>
+                  <td align="center"><strong><?php if($total_amount==0){ echo " Free ";}else{ echo "$".$total_amount;}?></strong></td>
+                </tr>
+              </table>
+            </div>
+            </fieldset>
+          
+          <!-- Contact Form End //-->
+        </div>
+      </div>
+      <div class="event-area">
+        <div>
+          <form id="registrationForm" name="registrationForm" action="" method="post" target="_top">
+            <input type="hidden" name="total_quantity" value="<?=$total_quantity?>" />
+            <input type="hidden" name="total_amount"  value="<?=$total_amount?>" />
+            <?php foreach($_REQUEST as $key=>$value){ ?>
+            <?php if(is_array($value)){?>
+            <input type="hidden" name="<?=$key?>" value="<?=implode(",",$value)?>" />
+            <?php }else{?>                            
+            <input type="hidden" name="<?=$key?>" value="<?=$value?>" />
+            <?php } ?>
+            <?php } ?>
+            
+            <input type="hidden" name="total_cost1" value="<?=$total?>" />
+            
+            <fieldset>
+            <div>
+              <div id="TabbedPanels1" class="TabbedPanels">
+                <ul class="TabbedPanelsTabGroup">
+                  <li class="TabbedPanelsTab" tabindex="0">Register</li>
+                  <li class="TabbedPanelsTab" tabindex="0">Review your order</li>
+                  <li class="TabbedPanelsTab" tabindex="0">Order Confirmation</li>
+                </ul>
+                <div class="TabbedPanelsContentGroup">
+                  <div class="TabbedPanelsContent">
+                    <table width="558" border="0" cellpadding="5" cellspacing="3">
+                      <tr>
+                        <td width="43">&nbsp;</td>
+                        <td width="173">&nbsp;</td>
+                        <td width="328">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2" align="right"><input type="checkbox" name="autofill" id="autofill" value="1" />Autofill data from profile</td>
+                      </tr>
+                      <?php $tc = 1; $lasti=-1; $lastval=-1; ?>                      
+                      <?php foreach($this->ticketdetail as $key=>$value) { ?>
+                      <?php if($_REQUEST['quant_'.$value['id']] > 0) { ?>
+                      <?php for($i=1; $i<=$_REQUEST['quant_'.$value['id']]; $i++ ) { ?>	
+                      <?php  if($tc > 1){?>	
+                      <tr>
+            			<td>&nbsp;</td>
+                        <td>Same AS Above</td>            			
+                        <td><input type="checkbox" name="copy" value="0" onclick="CopyInfo(this.checked,<?=$value['id']?>,<?=$i?>,<?=$lastval?>,<?=$lasti?>)" /></td>
+            		  </tr>
+                      <?php } $lasti=$i; $lastval=$value['id']; ?>        
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2" align="left"><strong>Ticket #<?=$i?> - <?=$value['ticket_title']?></strong></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td align="right" valign="top">First Name:</td>
+                        <td><label>
+                          <input type="text" name="attendee_<?=$value['id']?>_<?=$i?>_first_name" id="attendee_<?=$value['id']?>_<?=$i?>_first_name" class="order-textfield"  />
+                          </label></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td align="right" valign="top">Last Name:</td>
+                        <td><label>
+                          <input type="text" name="attendee_<?=$value['id']?>_<?=$i?>_last_name" id="attendee_<?=$value['id']?>_<?=$i?>_last_name" class="order-textfield" />
+                          </label></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td align="right" valign="top">Email Address:</td>
+                        <td><label>
+                          <input type="text" name="attendee_<?=$value['id']?>_<?=$i?>_email_address" id="attendee_<?=$value['id']?>_<?=$i?>_email_address" class="order-textfield" />
+                          </label></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td align="right" valign="top">Cell Phone:</td>
+                        <td><label>
+                          <input type="text" name="attendee_<?=$value['id']?>_<?=$i?>_cell_phone" id="attendee_<?=$value['id']?>_<?=$i?>_cell_phone" class="order-textfield" />
+                          </label></td>
+                      </tr>                                            
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <?php $tc++;} ?>
+            		  <?php } ?>
+                      <?php } ?>	
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+                    <table width="558" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="274" align="center">&nbsp;</td>
+                        <td width="274">
+                        <?php if($total > 0){?>
+                        <input type="submit" name="submit" class="buttoncontact" id="buttonsend" value="Review Your Order" onclick="javascript: payByEventbrite();return false;" /> 
+                        <? } else {?>
+                        <input type="submit" name="submit" class="buttoncontact" id="buttonsend" value="Print Ticket" onclick="javascript: payByEventbrite();return false;" />
+                        <? } ?>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="TabbedPanelsContent">
+                    <table width="558" border="0" cellpadding="3" cellspacing="3">
+                      <tr>
+                        <td width="18">&nbsp;</td>
+                        <td width="187">&nbsp;</td>
+                        <td width="323">&nbsp;</td>
+                      </tr>
+                      <? if(!Zend_Auth::getInstance()->hasIdentity()){?>
+                      <tr>
+                        <td height="56">&nbsp;</td>
+                        <td valign="top"><strong>Ticket Buyer</strong></td>
+                        <td valign="top">Haseeb Memon<br />
+                          <a href="#">change</a>
+                          <div class="change_popup">
+                            <table width="418" border="0" cellpadding="5" cellspacing="5">
+                              <tr>
+                                <td valign="top">First Name: </td>
+                                <td><label>
+                                  <input type="text" name="email"  class="order-textfield" id="email" value="" />
+                                  </label></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td width="92" valign="top">Last Name: </td>
+                                <td width="254"><label>
+                                  <input type="text" name="email"  class="order-textfield" id="email" value="" />
+                                  </label></td>
+                                <td width="22">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top">Email Address: </td>
+                                <td><label>
+                                  <input type="text" name="email"  class="order-textfield" id="email" value="" />
+                                  </label></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                            </table>
+                            <table width="418" border="0">
+                              <tr>
+                                <td width="311" align="right" valign="top"><a href="#">Cancel</a></td>
+                                <td width="97" valign="bottom"><input type="submit" name="submit" class="buttoncontact" id="buttonsend" value="Save" /></td>
+                              </tr>
+                            </table>
+                          </div></td>
+                      </tr>
+                      <?php } ?>
+                      <tr>
+                        <td height="57">&nbsp;</td>
+                        <td valign="top"><strong>Billing Address</strong></td>
+                        <td valign="top">B-141- Ch USA<br />
+                          <a href="#">change</a></td>
+                      </tr>
+                      <tr>
+                        <td height="80">&nbsp;</td>
+                        <td valign="top"><strong>Credit Card</strong></td>
+                        <td valign="top">XXXX-XXXXXX-<br />
+                          Expires /<br />
+                          <a href="#">change</a></td>
+                      </tr>
+                      <tr>
+                        <td height="38">&nbsp;</td>
+                        <td valign="top"><strong>Total Amount</strong></td>
+                        <td valign="top">$100</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>
+                        <?php if($total > 0){?>
+                        <input type="submit" name="submit" class="buttoncontact" id="buttonsend" value="Print Ticket1" />
+                        <? } else {?>
+                        <input type="submit" name="submit" class="buttoncontact" id="buttonsend" value="Order Ticket1" />
+                        <? } ?>
+                        
+                        
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="TabbedPanelsContent">Content 3</div>
+                </div>
+              </div>
+              <script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+            </div>
+            </fieldset>
+          </form>
+          <!-- Contact Form End //-->
+        </div>
+      </div>
+    </div>
+    <div style="float:left; width:300px; margin-left:20px;">      
+      <?php if($this->eventdetail['start_date']!="0000-00-00" || $this->eventdetail['start_date']!="0000-00-00"){ ?>
+      <div class="event-rightcolum">
+        <div class="label-form-inline">
+          <label>
+          <h4>When</h4>
+          </label>
+          <div><?php echo date("l, F j, Y", strtotime($this->eventdetail['start_date'])) ; ?> at <?php echo date("h:i A", strtotime($this->eventdetail['start_time'])) ; ?> <br />
+            <span class="pipe">- to -</span><br />
+            <?php echo date("l, F j, Y", strtotime($this->eventdetail['end_date'])) ; ?> at <?php echo date("h:i A", strtotime($this->eventdetail['end_time'])) ; ?> <?php echo $this->eventdetail['time_zone'] ; ?><br />
+          </div>
+        </div>
+      </div>
+      <?php } ?>
+      <?php if( !empty($this->eventdetail['venue']) || !empty($this->eventdetail['city']) || !empty($this->eventdetail['state']) || !empty($this->eventdetail['country']) || !empty($this->eventdetail['zip']) ) { ?>
+      <div class="event-rightcolum">
+        <div class="label-form-inline">
+          <label>
+          <h4>Where</h4>
+          </label>
+          <div>             
+            <?php echo (empty($this->eventdetail['venue'])) ? '' : $this->eventdetail['venue']."<br />"; ?>  
+            <?php echo (empty($this->eventdetail['city'])) ? '' : $this->eventdetail['city'].", "; ?>
+            <?php echo (empty($this->eventdetail['state'])) ? '' : $this->eventdetail['state'].", "; ?>
+            <?php echo (empty($this->eventdetail['zip'])) ? '' : $this->eventdetail['zip']."<br /> "; ?>
+            <?php echo (empty($this->eventdetail['country'])) ? '' : $this->eventdetail['country']." "; ?>                         
+            <br />
+          </div>
+        </div>
+      </div>
+      <? } ?> 
+      <?php if( !empty($this->orgdetail['organization_name']) || !empty($this->orgdetail['organization_description']) ) { ?>
+      <div class="event-rightcolum">
+        <div class="label-form-inline">
+          <label>
+          <h4>Host</h4>
+          </label>
+          <div><?php echo $this->orgdetail['organization_name']; ?></div>
+          <div><?php echo $this->orgdetail['organization_description']; ?></div>
+        </div>
+      </div>
+      <? } ?>     
+    </div>
+  </div>
+  <!-- END OF CONTENT -->
+</div>

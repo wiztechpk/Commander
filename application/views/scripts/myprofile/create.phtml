@@ -1,0 +1,107 @@
+<div id="content">
+	<div class="maincontent">
+    
+    <div class="myeventbg">
+    <div class="animatedtabs">
+      <ul>
+        <li><a href="/createevent" title="Create Event"><span>Create Event</span></a></li>
+        <li><a href="/myevents"    title="My Events"><span>My Events</span></a></li>
+        <li><a href="/mytickets"   title="My Purchased Tickets"><span>My Purchased Tickets</span></a></li>
+        <li><a href="/deletedevents"   title="My Deleted Events"><span>My Deleted Events</span></a></li>
+        <li><a href="/myprofile"   title="My Profile"><span>My Profile</span></a></li>
+        <li><a href="/account"     title="My Account"><span>My Account</span></a></li>
+        <li style="margin-left: 110px;"><a href="javascript:history.go(-1);" title="Go Back" ><span>Go Back</span></a></li>
+      </ul>
+    </div>   
+    </div>
+    <form enctype="multipart/form-data" accept-charset="utf-8" method="POST" action="/myprofile/?oid=1502667554" id="organizer_form">
+    <input type="hidden" name="oid" value="<?php echo $this->oid?>"  /> 
+    <div class="event-profile">
+    <div>
+    <table width="880" border="0">
+      <tr>
+        <td width="491"><label>
+          <h4>Organizer Name</h4>
+          </label>
+          <input type="text" value="<?php echo $this->organization_name; ?>" name="organization_name" id="organization_name" class="event-textfield" />
+          <label>
+          <h4>About the Organizer</h4>
+          </label>
+          <textarea name="organization_description" id="organization_description" class="event-textarea" cols="2" rows="7" ><?php echo $this->organization_description; ?></textarea>          
+        </td>
+        <td width="379" valign="top"><label>
+          <h4>Organizer Logo</h4>
+          </label>
+          <table width="300" border="0">
+            <tr>
+              <td width="183">
+               <div id="organization_logo">
+                <img src="http://evbdn.eventbrite.com/s3-build/3556-rc09-14-97a4c53/django/images/icons/default-organizer-logo.png" />               
+               </div>
+              </td>
+              <td width="107" valign="top">Your image must be JPG, GIF, or PNG format and not exceed 1MB. It will be resized to make its width 225px.</td>
+            </tr>
+            <tr>
+              <td height="38"><div id="organization_logo_file"></div>  </td>
+              <td valign="top">&nbsp;</td>
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+    <table width="870" border="0">
+      <tr>
+        <td colspan="2"><label>
+          <h4>Integrate Social Networking feeds onto my profile page; </h4>
+          </label></td>
+      </tr>
+      <tr>
+        <td width="430"><table width="403" border="0">
+            <tr>
+              <td width="24"><label>
+                <input type="checkbox" id="show_facebook" name="show_facebook" value="1" <?php if($this->show_facebook==1) echo "checked";?> />
+                </label></td>
+              <td width="369">Add my facebook page activity feed </td>
+            </tr>
+            <tr>
+              <td colspan="2">http://www.facebook.com/
+                <input type="text" name="facebook" id="facebook" value="<?php echo $this->facebook; ?>"   class="event-smalltextfield" /></td>
+            </tr>
+          </table></td>
+        <td width="430" valign="top"><table width="428" border="0">
+            <tr>
+              <td width="23"><label>
+                <input type="checkbox" id="show_twitter" name="show_twitter" value="1" <?php if($this->show_twitter==1) echo "checked";?> />
+                </label></td>
+              <td width="395">Add my Twitter username or search feed </td>
+            </tr>
+            <tr>
+              <td colspan="2"><table width="424" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="116"><label>
+                      <input type="radio" name="twitter_type" id="twitter_type" value="0" <?php if($this->twitter_type==0) echo "checked";?> />                      
+                      User Name</label></td>
+                    <td width="308"><label>
+                      <input type="radio" name="twitter_type" value="1" id="twitter_type" <?php if($this->twitter_type==1) echo "checked";?> />
+                      Search Querry</label></td>
+                  </tr>
+                </table></td>
+            </tr>
+            <tr>
+              <td colspan="2"><input type="text" name="twitter" id="twitter" value="<?php echo $this->twitter; ?>" class="event-smalltextfield"  />
+                [Help Me]</td>
+            </tr>
+            
+          </table></td>
+      </tr>
+      <tr>
+            <td><div class="saveprofile_bt_link"><a href="javascript:void(0);" onclick="javascript:save_organization('<?php echo $this->oid?>');"class="saveprofile_bt_link"></a></div>
+	           <div class="viewprofile_bt_link"><a target="_blank" href="org/?oid=<?php echo $this->oid?>" class="viewprofile_bt_link"></a></div></td>
+            <td valign="top">&nbsp;</td>
+            </tr>
+    </table>
+  </div>
+</div>
+</form>       
+    
+	</div>
+</div>
